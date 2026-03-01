@@ -16,7 +16,6 @@ export default function MoodMemories() {
          id: doc.id
         });
       })
-
       setEntries(newEntries);
     });
 
@@ -41,8 +40,8 @@ export default function MoodMemories() {
             <MoodCard 
               key={entry.id}
               date={formattedDate}  
-              mood={entry.data.mood} 
-              note={entry.data.note} 
+              mood={entry.data.formData.mood} 
+              note={entry.data.formData.note} 
             />
           )
         })}
