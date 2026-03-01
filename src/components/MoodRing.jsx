@@ -1,6 +1,14 @@
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import db from "../db";
+import MoodForm from "./MoodForm";
+
 export default function MoodRing() {
-  
+
   return (
-    <h1>Mood Ring</h1>
+    <MoodForm />
   )
 }
+
+
+

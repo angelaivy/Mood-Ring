@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../db";
 import MoodCard from "./MoodCard";
@@ -7,8 +7,8 @@ export default function MoodMemories() {
   const [entries, setEntries] = useState([])
 
   useEffect(() => {
-  
-    const test = onSnapshot(collection(db, 'mood-logs'), (snapshot) => {
+    const moodLogsQuery = query(collection(db, 'mood-logs'), orderBy('timestamp', 'desc'));
+    const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {
       const newEntries = [];
       snapshot.docs.forEach(doc => {
         newEntries.push({
@@ -20,7 +20,7 @@ export default function MoodMemories() {
       setEntries(newEntries);
     });
 
-    return () => test
+    return () => getMoodLogs()
 
   }, [])
 
