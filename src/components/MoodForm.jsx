@@ -1,20 +1,17 @@
 import { useState } from "react"
 import { collection, addDoc } from "firebase/firestore"
 import db from "../db";
-import { Timestamp } from "firebase/firestore";
 import FormElement from "./FormElement";
 
-export default function MoodForm() {
+export default function MoodForm({formClass}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const date = new Date();
-    const timestamp = Timestamp.fromDate(date);
 
     await addDoc(collection(db, "mood-logs"), {
       formData,
-      timestamp,
+      timestamp: new Date(),
     });
 
     setFormData({'mood': '', 'note': ''});
@@ -26,7 +23,7 @@ export default function MoodForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={formClass} onSubmit={handleSubmit}>
       <fieldset>
         <legend>How are you feeling today?</legend>
         <FormElement type='input' id='happy' value='😀' onChange={handleChange} />

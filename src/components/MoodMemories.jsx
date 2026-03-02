@@ -29,17 +29,20 @@ export default function MoodMemories() {
       <ul>
         {entries.map((entry)=> {
           const date = entry.data.timestamp.toDate();
-          const formattedDate = date.toLocaleDateString('en-us', {
-            year: 'numeric',
+          const formattedDate = date.toLocaleString('en-US', {
             month: 'long',
             day: 'numeric',
+            year: 'numeric',
             hour: 'numeric',
-            minute: 'numeric'
+            minute: '2-digit',
+            hour12: true
           })
           return (
             <MoodCard 
               key={entry.id}
+              id={entry.id}
               date={formattedDate}  
+              rawDate={entry.data.timestamp}
               mood={entry.data.formData.mood} 
               note={entry.data.formData.note} 
             />
