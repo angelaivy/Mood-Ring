@@ -22,12 +22,12 @@ export default function MoodCard({id, date, rawDate, mood, note}) {
 
   return (
     <>
-      <li className={isEditing ? 'hide' : 'show'}>
+      <li>
         <h3>{date}</h3>
         <p>{mood}</p>
         {note ?? <p>{note}</p>}
-        <button onClick={editMood}>Edit</button>
-        <button onClick={deleteMood}>Delete</button>
+        <button onClick={() => editMood()}>Edit</button>
+        <button onClick={() => deleteMood()}>Delete</button>
       </li>
       
     </>
