@@ -1,35 +1,21 @@
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import db from "../db";
-import MoodForm from "./MoodForm";
 import { useState } from "react";
 
-export default function MoodCard({id, date, rawDate, mood, note}) {
-  const [isEditing, setIsEditing] = useState(false)
-
-  const editMood = async () => {
-    setIsEditing(true)
-    const newVal = window.prompt('Enter new mood');
-    await setDoc(doc(db, 'mood-logs', id), {
-      formData: {mood: mood, note: newVal},
-      // Keep the original date of the entry.
-      timestamp: rawDate,
-    });
-  }
-
-  const deleteMood = async () => {
+export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
+  const onDelete = async () => {
     await deleteDoc(doc(db, 'mood-logs', id));
   }
 
   return (
     <>
-      <li>
+      <li id={id} className={isEditing ? 'hide' : 'show'}>
         <h3>{date}</h3>
         <p>{mood}</p>
-        {note ?? <p>{note}</p>}
-        <button onClick={() => editMood()}>Edit</button>
-        <button onClick={() => deleteMood()}>Delete</button>
+        {note && <p>{note}</p>}
+        <button onClick={onEdit}>Edit</button>
+        <button onClick={onDelete}>Delete</button>
       </li>
-      
     </>
   )
 }
