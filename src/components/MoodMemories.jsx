@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../db";
 import MoodCard from "./MoodCard";
@@ -29,7 +29,7 @@ export default function MoodMemories() {
     <>
       <h2>Mood Memories</h2>
       <ul>
-        {entries.map((entry)=> {
+        {entries.map((entry) => {
           const date = entry.data.timestamp.toDate();
           const formattedDate = date.toLocaleString('en-US', {
             month: 'long',

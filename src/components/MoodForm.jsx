@@ -24,12 +24,11 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
         formData,
         // Keep the original date of the entry.
         timestamp: rawDate,
-      });
+      }); 
     }
     formToggle();
     setFormData({'mood': '', 'note': ''});
     e.target.reset();
-    
   }
 
   const handleChange = (e) => {
@@ -48,6 +47,7 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
           <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
           <FormElement type='input' id='silly' value='😜' onChange={handleChange} />
           <FormElement type='input' id='neutral' value='😐' onChange={handleChange} />
+          <FormElement type='input' id='tired' value='😴' onChange={handleChange} />
           <FormElement type='input' id='sad' value='😢' onChange={handleChange} />
           <FormElement type='input' id='confused' value='😕' onChange={handleChange} />
           <FormElement type='input' id='angry' value='😡' onChange={handleChange} />
