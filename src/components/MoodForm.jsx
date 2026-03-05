@@ -5,7 +5,6 @@ import FormElement from "./FormElement";
 
 export default function MoodForm({type, id, rawDate, isFormVisible, formToggle}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
-  //const [isSubmitted, setIsSubmitted] = useState(false)  
 
   // Handle submit for both the edit form and home page form.
   const handleSubmit = async (e) => {

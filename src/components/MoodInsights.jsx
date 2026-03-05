@@ -5,6 +5,16 @@ import db from "../db";
 
 export default function MoodInsights() {
   const [moods, setMoods] = useState([])
+  const [topMood, setTopMood] = useState('')
+  const moodCount = {
+      '😀': 0,
+      '😜': 0,
+      '😐': 0,
+      '😴': 0,
+      '😢': 0,
+      '😕': 0,
+      '😡': 0,
+    }
     
   useEffect(() => {
     const moodQuery = query(collection(db, 'mood-logs'), orderBy('timestamp', 'desc'));
@@ -19,63 +29,51 @@ export default function MoodInsights() {
     () => getMoods()
   }, [])
 
-  const frequentMood = (moodsArray) => {
-    if (!moodsArray) return;
-
-    const moodMap = {
-      '😀': 0,
-      '😜': 0,
-      '😐': 0,
-      '😴': 0,
-      '😢': 0,
-      '😕': 0,
-      '😡': 0,
-    }
-
-    for (const mood of moodsArray) {
+  useEffect(() => {
+    for (const mood of moods) {
       switch(mood) {
         case '😀':
-          moodMap['😀']++;
+          moodCount['😀']++;
           break;
         case '😜':
-          moodMap['😜']++;
+          moodCount['😜']++;
           break;
         case '😐':
-          moodMap['😐']++;
+          moodCount['😐']++;
           break;
         case '😴':
-          moodMap['😴']++;
+          moodCount['😴']++;
           break;
         case '😢':
-          moodMap['😢']++;
+          moodCount['😢']++;
           break;
         case '😕':
-          moodMap['😕']++;
+          moodCount['😕']++;
           break;
         case '😡':
-          moodMap['😡']++;
+          moodCount['😡']++;
           break;
         default:
           return;
       }
     }
 
-    // Conver moodMap into an array of pairs.
-    const mostFrequentMood = Object.entries(moodMap)
+    // Convert moodCount into an array of pairs.
+    const mostFrequentMood = Object.entries(moodCount)
       .reduce((max, current) => {
         // check if the current count is higher than the max count.
         return current[1] > max[1] ? current : max;
       });
     
-    return mostFrequentMood[0];
-  }
+    setTopMood(mostFrequentMood[0])
+  }, [moodCount])
 
   return (
     <>
       <h2>Mood Insights</h2>
       <div>
         <h3>Most frequent Mood</h3>
-        {frequentMood(moods)}
+        {topMood}
       </div>
      
      </>
