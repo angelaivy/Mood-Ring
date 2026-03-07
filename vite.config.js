@@ -7,4 +7,10 @@ export default defineConfig({
   define: {
     'process.env': {}
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.js'],
+    testMatch: ['./src/tests/**/*.test.jsx'],
+    globals: true,
+  },
 })

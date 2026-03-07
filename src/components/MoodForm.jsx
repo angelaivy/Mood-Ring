@@ -5,6 +5,7 @@ import FormElement from "./FormElement";
 
 export default function MoodForm({type, id, rawDate, isFormVisible, formToggle}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   // Handle submit for both the edit form and home page form.
   const handleSubmit = async (e) => {
@@ -25,8 +26,10 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
         timestamp: rawDate,
       }); 
     }
+
     formToggle();
     setFormData({'mood': '', 'note': ''});
+    setIsSubmitted(true);
     e.target.reset();
   }
 
@@ -36,11 +39,12 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
   const addAnotherMood = () => {
     formToggle();
+    setIsSubmitted(false);
   }
 
   return (
     <div>
-      <form className={isFormVisible ? 'show' : 'hide'} onSubmit={handleSubmit}>
+      {(!isSubmitted && isFormVisible) && <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>How are you feeling today?</legend>
           <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
@@ -54,10 +58,10 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
         <FormElement type='textarea' id='note' onChange={handleChange}/>
         <button type='submit'>Submit Mood</button>
-      </form>
+      </form> }
 
-      {type === 'addEntry' ? (
-        <div className={`confirmation ${isFormVisible ? 'hide' : 'show'}`}>
+      {isSubmitted && type === 'addEntry' ? (
+        <div className={'confirmation'}>
           <p>Mood Saved ✨</p>
           <button onClick={() => addAnotherMood()}>Add another mood</button>
         </div>
