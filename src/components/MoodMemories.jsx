@@ -1,16 +1,20 @@
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import db from "../db";
+import { db } from "../db";
 import MoodCard from "./MoodCard";
-import MoodForm from "./MoodForm";
+import MoodForm from "./form/MoodForm";
 import React from "react";
+import GetUser from "./helpers/GetUser"
 
 export default function MoodMemories() {
   const [entries, setEntries] = useState([])
   const [editingId, setEditingId] = useState(null);
+  const user = GetUser();
   
   useEffect(() => {
-    const moodLogsQuery = query(collection(db, 'mood-logs'), orderBy('timestamp', 'desc'));
+    if (!user.uid) return
+    
+    const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'));
     const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {
       const newEntries = [];
       snapshot.docs.forEach(doc => {
@@ -23,7 +27,7 @@ export default function MoodMemories() {
     });
 
     return () => getMoodLogs()
-  }, [])
+  }, [user])
 
   return (
     <>

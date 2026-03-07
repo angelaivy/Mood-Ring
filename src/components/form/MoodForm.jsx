@@ -1,11 +1,13 @@
 import { useState} from "react"
 import { collection, doc, addDoc, setDoc } from "firebase/firestore"
-import db from "../db";
+import { db } from "../../db";
 import FormElement from "./FormElement";
+import GetUser from "../helpers/GetUser"
 
 export default function MoodForm({type, id, rawDate, isFormVisible, formToggle}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const user = GetUser();
 
   // Handle submit for both the edit form and home page form.
   const handleSubmit = async (e) => {
@@ -13,14 +15,16 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
     const timestamp = new Date();
 
     if (type === 'addEntry') {
-      await addDoc(collection(db, "mood-logs"), { 
+      if (!user.uid) return
+      await addDoc(collection(db, 'users', user.uid, 'mood-logs'), { 
         formData,
         timestamp,
       });
     }
 
     if (type === 'editEntry') {
-      await setDoc(doc(db, 'mood-logs', id), {
+      if (!user.uid) return
+      await setDoc(doc(db, 'users', user.uid, 'mood-logs', id), {
         formData,
         // Keep the original date of the entry.
         timestamp: rawDate,

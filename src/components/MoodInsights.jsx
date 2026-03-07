@@ -9,7 +9,7 @@ import { Chart as ChartJS,
   Tooltip, 
   Legend } from 'chart.js';
 import { Pie, Bar, Line } from 'react-chartjs-2';
-import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './MoodDataHelpers';
+import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './Helpers/MoodDataHelpers';
 ChartJS.register(
   ArcElement, 
   CategoryScale,
@@ -133,8 +133,8 @@ export default function MoodInsights() {
       <div>
         <h3>Most frequent Mood</h3>
         {<MostFrequentMood />}
-        <Line options={lineChartOptions} data={lineChartData} />;
-        <Bar options={barChartOptions} data={barChartData} />;
+        <Line options={lineChartOptions} data={lineChartData} />
+        <Bar options={barChartOptions} data={barChartData} />
         <Pie data={pieData} />
       </div>
      </>

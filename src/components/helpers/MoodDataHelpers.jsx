@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import db from '../db';
+import { db } from '../../db';
+import GetUser from './GetUser'
 
 // Get all data from the db. Includes moods, notes, timestamp, id.
 export function GetAllMoodData() {
+  const user = GetUser();
   const [moodLogs, setMoodLogs] = useState([])
   
   useEffect(() => {
-    const moodLogsQuery = query(collection(db, 'mood-logs'), orderBy('timestamp', 'desc'));
+    if (!user.uid) return
+
+    const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'));
     const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {
       const moodLogsArray = [];
       snapshot.docs.forEach(doc => {
@@ -20,7 +24,7 @@ export function GetAllMoodData() {
     });
 
     return () => getMoodLogs()
-  }, [])
+  }, [user])
 
   return moodLogs
 }
