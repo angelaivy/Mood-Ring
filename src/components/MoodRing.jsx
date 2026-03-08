@@ -4,45 +4,46 @@ import MoodForm from "./form/MoodForm";
 import { useEffect, useState } from "react";
 import 'firebaseui/dist/firebaseui.css';
 import { useNavigate } from 'react-router-dom'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function MoodRing() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-     // Initialize the FirebaseUI Widget using Firebase.
-    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
-
-    ui.start('#firebaseui-auth-container', {
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
-      signInFlow: 'popup',
-      callbacks: {
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-          console.log('sign in successful!')
-          navigate('/')
-          return false;
-        },
-      },
-    });
-  }, [])
- 
+  const auth = getAuth();
+  const Navigate = useNavigate();
   const [isFormVisible, setIsFormVisible] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const todaysDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric'
   });
+  
+  useEffect(() => {
+     // Initialize the FirebaseUI Widget using Firebase.
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
+    if (!isLoggedIn) {
+      ui.start('#firebaseui-auth-container', {
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+        signInFlow: 'popup',
+        signInSuccessUrl: '/',
+      });
+    }
+  }, [isLoggedIn]) 
 
+  onAuthStateChanged(auth, (user) => {
+    user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+ 
   return (
     <>
-      <div id='firebaseui-auth-container'></div>
+      {!isLoggedIn && <div id='firebaseui-auth-container'></div>}
       <div>{todaysDate}</div>
-      <MoodForm 
+      {isLoggedIn && <MoodForm 
         type='addEntry' 
         isFormVisible={isFormVisible} 
-        formToggle={() => setIsFormVisible(prev => !prev)} />
+        formToggle={() => setIsFormVisible(prev => !prev)} />}
     </>
     
   )

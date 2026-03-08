@@ -15,7 +15,7 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
     const timestamp = new Date();
 
     if (type === 'addEntry') {
-      if (!user.uid) return
+      if (!user?.uid) return
       await addDoc(collection(db, 'users', user.uid, 'mood-logs'), { 
         formData,
         timestamp,
@@ -23,7 +23,7 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
     }
 
     if (type === 'editEntry') {
-      if (!user.uid) return
+      if (!user?.uid) return
       await setDoc(doc(db, 'users', user.uid, 'mood-logs', id), {
         formData,
         // Keep the original date of the entry.

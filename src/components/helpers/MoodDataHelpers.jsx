@@ -9,7 +9,7 @@ export function GetAllMoodData() {
   const [moodLogs, setMoodLogs] = useState([])
   
   useEffect(() => {
-    if (!user.uid) return
+    if (!user?.uid) return
 
     const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'));
     const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {

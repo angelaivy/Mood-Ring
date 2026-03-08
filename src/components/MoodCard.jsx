@@ -7,7 +7,7 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
   const user = GetUser();
   const [isDeleted, setIsDeleted] = useState(false);
   const onDelete = async () => {
-    if (!user.uid) return
+    if (!user?.uid) return
     await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id));
     setIsDeleted(true);
   }

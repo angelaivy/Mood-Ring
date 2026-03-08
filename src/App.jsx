@@ -6,10 +6,9 @@ import MoodInsights from './components/MoodInsights'
 import Header from './components/Header'
 
 function App() {
-
   return (
     <>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={ <MoodRing /> } />
         <Route path="/mood-memories" element={ <MoodMemories /> } />
