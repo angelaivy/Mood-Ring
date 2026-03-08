@@ -59,6 +59,7 @@ export default function MoodMemories() {
                 key={`mood_${entry.id}`}
                 type='editEntry' 
                 id={entry.id} 
+                date={formattedDate}
                 rawDate={entry.data.timestamp}
                 isFormVisible={editingId === entry.id}
                 formToggle={() => setEditingId(null)}

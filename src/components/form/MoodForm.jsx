@@ -5,9 +5,18 @@ import FormElement from "./FormElement";
 import GetUser from "../helpers/GetUser"
 import './MoodForm.css';
 
-export default function MoodForm({type, id, rawDate, isFormVisible, formToggle}) {
+/* 
+  The form appears in two places: on the home page to add an entry,
+  and on the mood memories page to edit an entry. The edit entry form
+  is a modal, so it comes with modal styling and extra html which is
+  conditionally shown in this component.
+*/
+export default function MoodForm({type, id, rawDate, date, isFormVisible, formToggle}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [introFormText] = useState(
+    type === 'editEntry' ? `Edit entry for ${date}` : 'How are you feeling today?'
+  )
   const user = GetUser();
 
   // Handle submit for both the edit form and home page form.
@@ -21,6 +30,7 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
         formData,
         timestamp,
       });
+      setIsSubmitted(true);
     }
 
     if (type === 'editEntry') {
@@ -34,7 +44,6 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
     formToggle();
     setFormData({'mood': '', 'note': ''});
-    setIsSubmitted(true);
     e.target.reset();
   }
 
@@ -49,10 +58,25 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
   return (
     <div>
-      {(!isSubmitted && isFormVisible) && 
+      {// Background overlay when modal is visible.
+        (isFormVisible && type === 'editEntry') && <div className='overlay'></div>
+      }
+      { // Set form visibility based on editing or submitted state.
+      (!isSubmitted && isFormVisible) && 
+        <div className={(type === 'editEntry') ? 'modal' : ''}>
+        {// Only show the close button if it's the edit form modal.
+          (type === 'editEntry') && 
+          <>
+            <button className='closeModal' onClick={() => formToggle()}>Close Modal</button>
+            <span className='spanWrapper'>
+              <span className='bm-cross right'></span>
+              <span className='bm-cross left'></span>
+            </span>
+          </>
+        }
       <form onSubmit={handleSubmit}>  
         <fieldset>
-          <legend><h3>How are you feeling today?</h3></legend>
+          <legend><h3>{introFormText}</h3></legend>
           <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
           <FormElement type='input' id='excited' value='🤩' onChange={handleChange} />
           <FormElement type='input' id='silly' value='😜' onChange={handleChange} />
@@ -66,6 +90,7 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
         <FormElement type='textarea' id='note' onChange={handleChange}/>
         <button type='submit'>Submit Mood</button>
       </form> 
+      </div>
       }
 
       {isSubmitted && type === 'addEntry' ? (
