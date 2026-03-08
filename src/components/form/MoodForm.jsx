@@ -3,6 +3,7 @@ import { collection, doc, addDoc, setDoc } from "firebase/firestore"
 import { db } from "../../db";
 import FormElement from "./FormElement";
 import GetUser from "../helpers/GetUser"
+import './MoodForm.css';
 
 export default function MoodForm({type, id, rawDate, isFormVisible, formToggle}) {
   const [formData, setFormData] = useState({'mood': '', 'note': ''})
@@ -48,10 +49,12 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
   return (
     <div>
-      {(!isSubmitted && isFormVisible) && <form onSubmit={handleSubmit}>
+      {(!isSubmitted && isFormVisible) && 
+      <form onSubmit={handleSubmit}>  
         <fieldset>
-          <legend>How are you feeling today?</legend>
+          <legend><h3>How are you feeling today?</h3></legend>
           <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
+          <FormElement type='input' id='excited' value='🤩' onChange={handleChange} />
           <FormElement type='input' id='silly' value='😜' onChange={handleChange} />
           <FormElement type='input' id='neutral' value='😐' onChange={handleChange} />
           <FormElement type='input' id='tired' value='😴' onChange={handleChange} />
@@ -62,11 +65,12 @@ export default function MoodForm({type, id, rawDate, isFormVisible, formToggle})
 
         <FormElement type='textarea' id='note' onChange={handleChange}/>
         <button type='submit'>Submit Mood</button>
-      </form> }
+      </form> 
+      }
 
       {isSubmitted && type === 'addEntry' ? (
         <div className={'confirmation'}>
-          <p>Mood Saved ✨</p>
+          <p>✨ Mood Saved ✨</p>
           <button onClick={() => addAnotherMood()}>Add another mood</button>
         </div>
       ) : '' }

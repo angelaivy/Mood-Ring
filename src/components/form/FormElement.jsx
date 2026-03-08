@@ -2,8 +2,7 @@ export default function FormElement({ type, id, value, onChange }) {
   return (
     <>
     {type === 'input' ? (
-      <div>
-        <label htmlFor={id} aria-label={id}>{value}</label>
+      <div className="input wrapper">
         <input 
           type='radio' 
           id={id}
@@ -11,9 +10,10 @@ export default function FormElement({ type, id, value, onChange }) {
           value={value}
           required 
           onChange={onChange} />
+          <label htmlFor={id} aria-label={id}>{value}</label>
       </div>
      ) : (
-      <div>
+      <div className="textarea wrapper">
         <label htmlFor={id}>Note:</label>
         <textarea 
           id={id} 

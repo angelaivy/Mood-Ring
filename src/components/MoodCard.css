@@ -1,0 +1,36 @@
+.card {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  /* swap dynamically per mood */
+  border-left: 4px solid transparent;
+}
+
+.card h3 {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.card .mood {
+  font-size: 2rem;
+  margin: 10px;
+}
+
+.card .note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+  font-style: italic;
+}
+
+.card button {
+  padding: 5px 15px;
+  min-width: 80px;
+  margin-right: 24px;
+}
+
+.card li {
+  padding-left: 20px;
+}

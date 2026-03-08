@@ -39,7 +39,7 @@ export default function MoodRing() {
   return (
     <>
       {!isLoggedIn && <div id='firebaseui-auth-container'></div>}
-      <div>{todaysDate}</div>
+      <div><h2>{todaysDate}</h2></div>
       {isLoggedIn && <MoodForm 
         type='addEntry' 
         isFormVisible={isFormVisible} 
