@@ -38,6 +38,7 @@ export default function MoodMemories() {
   return (
     <>
       <h2>Mood Memories</h2>
+      {(!entries.length) && <p>Go to the <a href='/'>home page</a> to log your first mood! Your moods will show here.</p>}
       <ul className="cardList">
         {entries.map((entry) => {
           const date = entry.data.timestamp.toDate()

@@ -40,10 +40,12 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
       <li id={id} className='card' style={{ borderLeftColor: moodColors[mood] }}>
         <h3>{date}</h3>
         <p className='mood'>{mood}</p>
-        {note && <p className='note'>{note}</p>}
-        <div className='cardBtns'>
-          <button onClick={onEdit}>Edit</button>
-          <button onClick={onDelete}>Delete</button>
+        <div class="row2-col1">
+          {note && <p className='note'>{note}</p>}
+          <div className='cardBtns'>
+            <button onClick={onEdit}>Edit</button>
+            <button onClick={onDelete}>Delete</button>
+          </div>
         </div>
       </li> 
     }
