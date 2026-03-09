@@ -20,8 +20,32 @@ ChartJS.register(
   Title,
   Tooltip, 
   Legend);
+import './MoodInsights.css'
+import '../styles/variables.css'
 
 export default function MoodInsights() {
+  const primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary')
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--color-accent')
+  const happy = getComputedStyle(document.documentElement).getPropertyValue('--mood-happy')
+  const excited = getComputedStyle(document.documentElement).getPropertyValue('--mood-excited')
+  const silly = getComputedStyle(document.documentElement).getPropertyValue('--mood-silly')
+  const neutral = getComputedStyle(document.documentElement).getPropertyValue('--mood-neutral')
+  const sleepy = getComputedStyle(document.documentElement).getPropertyValue('--mood-sleepy')
+  const sad = getComputedStyle(document.documentElement).getPropertyValue('--mood-sad')
+  const confused = getComputedStyle(document.documentElement).getPropertyValue('--mood-confused')
+  const angry = getComputedStyle(document.documentElement).getPropertyValue('--mood-angry')
+
+  const moodColors = {
+    '😀': happy,
+    '🤩': excited,
+    '😜': silly,
+    '😐': neutral,
+    '😴': sleepy,
+    '😢': sad,
+    '😕': confused,
+    '😡': angry,
+  }
+
   // Bar Chart
   const countForBarChart = MoodCount();
   const barChartOptions = {
@@ -33,19 +57,33 @@ export default function MoodInsights() {
       title: {
         display: true,
         text: 'Mood Frequency',
+        color: '#fffffe',
+        font: { size: 16 },
       },
     },
+    scales: {
+        y: {
+          ticks: {
+            color: '#fffffe'
+          },
+          grid: { color: 'rgba(255,255,255,0.1)' },
+        },
+        x: {
+          grid: { color: 'rgba(255,255,255,0.1)' }
+        }
+      }
   };
 
   const barChartLabels = Object.keys(countForBarChart);
   const moodStyles = {
-    '😀': { background: '#FFD700' },
-    '😜': { background: '#FF69B4' },
-    '😐': { background: '#A9A9A9' },
-    '😴': { background: '#6495ED' },
-    '😢': { background: '#4169E1' },
-    '😕': { background: '#DDA0DD' },
-    '😡': { background: '#FF4500' },
+    '😀': { background: happy },
+    '🤩': { background: excited },
+    '😜': { background: silly },
+    '😐': { background: neutral },
+    '😴': { background: sleepy },
+    '😢': { background: sad },
+    '😕': { background: confused },
+    '😡': { background: angry },
   }
   const barChartData = {
     labels: barChartLabels,
@@ -59,27 +97,38 @@ export default function MoodInsights() {
 
   // Pie Chart
   const getMoodCountData = GetMoodCountsOnly();
+  const pieOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true
+      },
+      title: {
+        display: true,
+        text: 'Mood Frequency',
+        color: '#fffffe',
+        font: { size: 16 },
+      },
+    },
+  };
   const pieData = {
-    labels: ['😀', '😜', '😐', '😴', '😢', '😕', '😡'],
+    labels: ['😀', '🤩', '😜', '😐', '😴', '😢', '😕', '😡'],
     datasets: [
       {
         label: 'Mood',
         data: getMoodCountData,
         backgroundColor: [
-          'rgba(11, 2, 4, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          happy,
+          excited,
+          silly,
+          neutral,
+          sleepy,
+          sad,
+          confused,
+          angry
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+          accent
         ],
         borderWidth: 1,
       },
@@ -92,27 +141,42 @@ export default function MoodInsights() {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: '#fffffe',
+          font: { size: 16 },
+        }
       },
       title: {
-        display: true,
-        text: 'Chart.js Line Chart',
+        display: false,
       },
     },
     scales: {
-      y: { // Configuration for the Y-axis
+      y: {
         ticks: {
           callback: (value) => {
             const scoreToMood = {
-              7: '😀', 6: '😜', 5: '😐', 4: '😴', 3: '😕', 2: '😢', 1: '😡'
+              8: '😀',
+              7: '🤩',
+              6: '😜',
+              5: '😐',
+              4: '😴',
+              3: '😕',
+              2: '😢',
+              1: '😡'
             }
             return scoreToMood[value];
           }
-        }
+        },
+        grid: { color: 'rgba(255,255,255,0.1)' },
+      },
+      x: {
+        ticks: { color: '#fffffe' },
+        grid: { color: 'rgba(255,255,255,0.1)' }
       }
     }
   };
   const moodScore = {
-    '😀': 7, '😜': 6, '😐': 5, '😴': 4, '😕': 3, '😢': 2, '😡': 1
+    '😀': 8, '🤩': 7, '😜': 6, '😐': 5, '😴': 4, '😕': 3, '😢': 2, '😡': 1
   }
   const moodDataObj = GetAllMoodData().slice().reverse();
   const lineChartData = {
@@ -124,18 +188,23 @@ export default function MoodInsights() {
       data: moodDataObj.map(entry => 
         moodScore[entry.data.formData.mood]
       ),
+      borderColor: primary,
+      pointBackgroundColor: moodDataObj.map(entry => moodColors[entry.data.formData.mood]) 
     }]
   }
+
 
   return (
     <>
       <h2>Mood Insights</h2>
-      <div>
-        <h3>Most frequent Mood</h3>
-        {<MostFrequentMood />}
+      <div className='insights'>
+        <div className="card">
+          <h3>Most frequent Mood</h3>
+          {<p><MostFrequentMood /></p>}
+        </div>
         <Line options={lineChartOptions} data={lineChartData} />
         <Bar options={barChartOptions} data={barChartData} />
-        <Pie data={pieData} />
+        <Pie options={pieOptions} data={pieData} />
       </div>
      </>
   )

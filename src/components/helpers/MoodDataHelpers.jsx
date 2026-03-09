@@ -49,6 +49,7 @@ export function MoodCount() {
   const moods = GetMoodData();
   const [moodCount, setMoodCount] = useState({
     '😀': 0,
+    '🤩': 0,
     '😜': 0,
     '😐': 0,
     '😴': 0,
@@ -59,7 +60,7 @@ export function MoodCount() {
 
   useEffect(() => {
     const newCount = {
-      '😀': 0, '😜': 0, '😐': 0, '😴': 0, '😢': 0, '😕': 0, '😡': 0,
+      '😀': 0, '🤩': 0, '😜': 0, '😐': 0, '😴': 0, '😢': 0, '😕': 0, '😡': 0,
     };
     for (const mood of moods) {
       if (newCount[mood] !== undefined) {

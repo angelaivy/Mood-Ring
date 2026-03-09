@@ -34,6 +34,10 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
+h2 {
+  margin-bottom: 60px;
+}
+
 body, p {
   font-family: var(--font-family-body);
   font-optical-sizing: auto;

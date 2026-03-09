@@ -17,9 +17,21 @@ export default function Header() {
     setIsOpen(false);
   };
 
+  const signOut = () => {
+    firebase.auth().signOut()
+    .then(() => {
+      Navigate('/')
+      closeSideBar()
+      setIsLoggedIn(false)
+    })
+    .catch((e) =>{
+      console.error('An error happened on signout', e);
+    });
+  }
+
   return (
     <header>
-      <h1>Mood Ring</h1>
+      {user && <h1>Mood Ring</h1>}
       <Menu
         isOpen={isOpen}
         onStateChange={handleStateChange}
@@ -40,11 +52,7 @@ export default function Header() {
           </li>}
           {user && <li>{user.displayName}</li>}
           {user && <li>
-            <button onClick={() => {
-              firebase.auth().signOut();
-              Navigate('/')
-              closeSideBar
-            }}>Logout</button>
+            <button onClick={() => signOut()}>Logout</button>
           </li>}
         </ul>
       </nav>

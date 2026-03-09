@@ -1,0 +1,23 @@
+.insights .card {
+  text-align: center;
+}
+
+.insights .card h3{
+  text-align: center;
+  font-size: var(--font-size-xl);
+  background: linear-gradient(135deg, var(--mood-happy), var(--mood-excited), var(--mood-sad));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 20px 0;
+}
+
+.insights .card p{
+  font-size: var(--font-size-xxl);
+  margin: 0;
+}
+
+canvas {
+  margin: 80px 0
+}
+
+

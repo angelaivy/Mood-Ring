@@ -4,7 +4,7 @@ import { useState } from "react";
 import GetUser from "./helpers/GetUser";
 import './MoodCard.css'
 
-export default function MoodCard({id, date, mood, note, onEdit, onClose, isEditing}) {
+export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
   const user = GetUser();
   const [isDeleted, setIsDeleted] = useState(false);
 

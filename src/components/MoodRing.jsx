@@ -3,12 +3,11 @@ import * as firebaseui from 'firebaseui'
 import MoodForm from "./form/MoodForm";
 import { useEffect, useState } from "react";
 import 'firebaseui/dist/firebaseui.css';
-import { useNavigate } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import './MoodRing.css'
 
 export default function MoodRing() {
   const auth = getAuth();
-  const Navigate = useNavigate();
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -38,8 +37,13 @@ export default function MoodRing() {
  
   return (
     <>
-      {!isLoggedIn && <div id='firebaseui-auth-container'></div>}
       <div><h2>{todaysDate}</h2></div>
+      {!isLoggedIn && <div className='landing'>
+        <h1>Mood Ring</h1>
+        <p>Mood Ring ✨ Your daily mood journal. Track how you're feeling, reflect on your patterns, and understand yourself a little better — one mood at a time. Sign in to get started!</p>
+        <div id='firebaseui-auth-container'></div> 
+      </div>
+      }
       {isLoggedIn && <MoodForm 
         type='addEntry' 
         isFormVisible={isFormVisible} 
