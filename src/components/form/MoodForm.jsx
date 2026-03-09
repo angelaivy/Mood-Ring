@@ -1,9 +1,9 @@
 import { useState} from "react"
 import { collection, doc, addDoc, setDoc } from "firebase/firestore"
-import { db } from "../../db";
-import FormElement from "./FormElement";
+import { db } from "../../db"
+import FormElement from "./FormElement"
 import GetUser from "../helpers/GetUser"
-import './MoodForm.css';
+import './MoodForm.css'
 
 /* 
   The form appears in two places: on the home page to add an entry,
@@ -17,20 +17,20 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
   const [introFormText] = useState(
     type === 'editEntry' ? `Edit entry for ${date}` : 'How are you feeling today?'
   )
-  const user = GetUser();
+  const user = GetUser()
 
   // Handle submit for both the edit form and home page form.
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    const timestamp = new Date();
+    e.preventDefault()
+    const timestamp = new Date()
 
     if (type === 'addEntry') {
       if (!user?.uid) return
       await addDoc(collection(db, 'users', user.uid, 'mood-logs'), { 
         formData,
         timestamp,
-      });
-      setIsSubmitted(true);
+      })
+      setIsSubmitted(true)
     }
 
     if (type === 'editEntry') {
@@ -39,21 +39,21 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
         formData,
         // Keep the original date of the entry.
         timestamp: rawDate,
-      }); 
+      })
     }
 
-    formToggle();
-    setFormData({'mood': '', 'note': ''});
-    e.target.reset();
+    formToggle()
+    setFormData({'mood': '', 'note': ''})
+    e.target.reset()
   }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const addAnotherMood = () => {
-    formToggle();
-    setIsSubmitted(false);
+    formToggle()
+    setIsSubmitted(false)
   }
 
   return (

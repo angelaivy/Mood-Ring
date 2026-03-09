@@ -16,22 +16,23 @@ export default function MoodMemories() {
   useEffect(() => {
     if (!user?.uid) return
     
-    const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'));
+    const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'))
     const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {
       const newEntries = []
       snapshot.docs.forEach(doc => {
         newEntries.push({
          data: doc.data(),
          id: doc.id
-        });
+        })
       })
-      setEntries(newEntries);
-      setIsLoading(false);
-    });
+      setEntries(newEntries)
+      setIsLoading(false)
+    })
 
     return () => getMoodLogs()
   }, [user])
 
+  // Set loading spinner.
   if (isLoading) return <Loading />
 
   return (
@@ -39,7 +40,7 @@ export default function MoodMemories() {
       <h2>Mood Memories</h2>
       <ul className="cardList">
         {entries.map((entry) => {
-          const date = entry.data.timestamp.toDate();
+          const date = entry.data.timestamp.toDate()
           const formattedDate = date.toLocaleString('en-US', {
             month: 'long',
             day: 'numeric',

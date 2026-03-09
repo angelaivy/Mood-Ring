@@ -8,15 +8,15 @@ import './MoodRing.css'
 import Loading from './Loading'
 
 export default function MoodRing() {
-  const auth = getAuth();
-  const [isFormVisible, setIsFormVisible] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const auth = getAuth()
+  const [isFormVisible, setIsFormVisible] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
 
   const todaysDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric'
-  });
+  })
 
   const uiConfig = {
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
@@ -26,18 +26,18 @@ export default function MoodRing() {
 
   useEffect(() => {
      // Initialize the FirebaseUI Widget using Firebase.
-    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
     if (isLoggedIn === false) {
-      ui.start('#firebaseui-auth-container', uiConfig);
+      ui.start('#firebaseui-auth-container', uiConfig)
     }
   }, [isLoggedIn]) 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsLoggedIn(!!user);
-    });
+      setIsLoggedIn(!!user)
+    })
     return () => unsubscribe()
-  }, []);
+  }, [])
 
   // Loading... 
   if (isLoggedIn === null) {
