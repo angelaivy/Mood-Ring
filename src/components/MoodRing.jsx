@@ -24,6 +24,12 @@ export default function MoodRing() {
     signInSuccessUrl: '/',
   }
 
+  // Adds the class for the mood ring background styling on home page only.
+  useEffect(() => {
+    document.body.classList.add('homePage')
+    return () => document.body.classList.remove('homePage')
+  }, [])
+
   useEffect(() => {
      // Initialize the FirebaseUI Widget using Firebase.
     const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
