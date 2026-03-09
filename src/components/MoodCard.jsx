@@ -8,10 +8,19 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
   const user = GetUser()
   const [isDeleted, setIsDeleted] = useState(false)
 
-  const onDelete = async () => {
+  const onDelete = () => {
     if (!user?.uid) return
-    await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id))
-    setIsDeleted(true)
+
+    const deleteData = async () => {
+      try {
+        await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id))
+        setIsDeleted(true)
+      } catch(e) {
+        console.log('There was an error trying to delete the entry', e)
+      }
+    }
+
+    deleteData()
   }
 
   const moodColors = {

@@ -20,26 +20,45 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
   const user = GetUser()
 
   // Handle submit for both the edit form and home page form.
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     const timestamp = new Date()
 
     if (type === 'addEntry') {
       if (!user?.uid) return
-      await addDoc(collection(db, 'users', user.uid, 'mood-logs'), { 
-        formData,
-        timestamp,
-      })
-      setIsSubmitted(true)
+
+      const addData = async () => {
+        try {
+          await addDoc(collection(db, 'users', user.uid, 'mood-logs'), { 
+            formData,
+            timestamp,
+          })
+          setIsSubmitted(true)
+
+        } catch (e) {
+          console.error('There was an error adding an entry', e)
+        }
+      }
+
+      addData()
     }
 
     if (type === 'editEntry') {
       if (!user?.uid) return
-      await setDoc(doc(db, 'users', user.uid, 'mood-logs', id), {
-        formData,
-        // Keep the original date of the entry.
-        timestamp: rawDate,
-      })
+
+      const editData = async () => {
+        try {
+          await setDoc(doc(db, 'users', user.uid, 'mood-logs', id), {
+            formData,
+            // Keep the original date of the entry.
+            timestamp: rawDate,
+          })
+        } catch(e) {
+          console.log('There was an error editing the entry', e)
+        }
+      }
+      
+      editData()
     }
 
     formToggle()
