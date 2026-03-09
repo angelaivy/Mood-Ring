@@ -1,6 +1,11 @@
 # Mood-Ring
 “Mood Ring” is a  React web application that allows users to track their daily moods using emojis, store entries in Firebase, and visualize emotional trends over time. Users can log moods, review their history, and view simple data visualizations like weekly mood summaries to gain insight into their patterns.
 
+## Run tests
+
+- npm install
+- npm test
+
 ## 1. What worked well in this project
 
 What worked well in the project for me was the planning phase. That really helped me get started and break things down into a checklist that I could work through. It made the work more managable. In doing the actual work, setting up the routes, links, and basic components worked well for me. I had a pretty good grasp on those concepts. And actually working with firebase didn't go too bad, even though this class was my first time working with firebase.

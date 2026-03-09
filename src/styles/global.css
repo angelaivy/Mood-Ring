@@ -27,6 +27,7 @@ button {
   font-size: var(--font-size-md);
   padding: 10px 20px;
   border-radius: 10px;
+  cursor: pointer;
   /* Experimental - fun! */
   corner-shape: bevel;
 }

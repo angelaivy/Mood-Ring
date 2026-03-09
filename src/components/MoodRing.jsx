@@ -31,9 +31,12 @@ export default function MoodRing() {
     }
   }, [isLoggedIn]) 
 
-  onAuthStateChanged(auth, (user) => {
-    user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    });
+    return () => unsubscribe();
+  }, []);
  
   return (
     <>
