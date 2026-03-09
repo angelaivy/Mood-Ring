@@ -7,9 +7,9 @@ import { Chart as ChartJS,
   Title, 
   ArcElement, 
   Tooltip, 
-  Legend } from 'chart.js';
-import { Pie, Bar, Line } from 'react-chartjs-2';
-import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './helpers/MoodDataHelpers';
+  Legend } from 'chart.js'
+import { Pie, Bar, Line } from 'react-chartjs-2'
+import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './helpers/MoodDataHelpers'
 ChartJS.register(
   ArcElement, 
   CategoryScale,
@@ -19,7 +19,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip, 
-  Legend);
+  Legend)
 import './MoodInsights.css'
 import '../styles/variables.css'
 

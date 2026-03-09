@@ -1,22 +1,24 @@
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../db";
-import MoodCard from "./MoodCard";
-import MoodForm from "./form/MoodForm";
-import React from "react";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore"
+import { useEffect, useState } from "react"
+import { db } from "../db"
+import MoodCard from "./MoodCard"
+import MoodForm from "./form/MoodForm"
+import React from "react"
 import GetUser from "./helpers/GetUser"
+import Loading from "./Loading"
 
 export default function MoodMemories() {
   const [entries, setEntries] = useState([])
-  const [editingId, setEditingId] = useState(null);
-  const user = GetUser();
+  const [editingId, setEditingId] = useState(null)
+  const user = GetUser()
+  const [isLoading, setIsLoading] = useState(true)
   
   useEffect(() => {
     if (!user?.uid) return
     
     const moodLogsQuery = query(collection(db, 'users', user.uid, 'mood-logs'), orderBy('timestamp', 'desc'));
     const getMoodLogs = onSnapshot(moodLogsQuery, (snapshot) => {
-      const newEntries = [];
+      const newEntries = []
       snapshot.docs.forEach(doc => {
         newEntries.push({
          data: doc.data(),
@@ -24,10 +26,13 @@ export default function MoodMemories() {
         });
       })
       setEntries(newEntries);
+      setIsLoading(false);
     });
 
     return () => getMoodLogs()
   }, [user])
+
+  if (isLoading) return <Loading />
 
   return (
     <>
