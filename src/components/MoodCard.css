@@ -1,0 +1,55 @@
+.card {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  /* swap dynamically per mood */
+  border-left: 4px solid transparent;
+}
+
+.card h3 {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  margin-top: 0;
+}
+
+.card .mood {
+  font-size: 2rem;
+  margin: 10px;
+  text-align: center;
+}
+
+.card .note {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+  font-style: italic;
+  text-align: center;
+}
+
+.cardBtns {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.card button {
+  padding: 8px 15px;
+  min-width: 80px;
+  margin-right: 24px;
+}
+.card button:last-child {
+  margin-right: 0;
+}
+ 
+.card li {
+  padding-left: 20px;
+}
+
+@media (min-width: 640px) {
+  .card {
+    max-width: 400px;
+    margin: 40px auto;
+  }
+}

@@ -1,0 +1,61 @@
+@import './variables.css';
+
+body {
+  padding: 10px 20px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+#root {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  /* Experimental - fun! */
+  corner-shape: bevel;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+h2 {
+  margin-bottom: 60px;
+}
+
+body, p {
+  font-family: var(--font-family-body);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--font-size-md);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

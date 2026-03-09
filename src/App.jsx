@@ -1,10 +1,19 @@
-import './App.css'
+import './styles/global.css'
+import { Routes, Route } from 'react-router'
+import MoodRing from './components/MoodRing'
+import MoodMemories from './components/MoodMemories'
+import MoodInsights from './components/MoodInsights'
+import Header from './components/Header'
 
 function App() {
-
   return (
     <>
-      <h1>Hello World!!</h1>
+      <Header />
+      <Routes>
+        <Route path="/" element={ <MoodRing /> } />
+        <Route path="/mood-memories" element={ <MoodMemories /> } />
+        <Route path="/mood-insights" element={ <MoodInsights /> } />
+      </Routes>
     </>
   )
 }

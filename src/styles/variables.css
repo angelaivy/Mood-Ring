@@ -1,0 +1,36 @@
+:root {
+  /* Backgrounds & Text */
+  --color-background: #0f0e17; 
+  --color-surface: #1a1a2e;
+  --color-text: #f3f3f3;
+  --color-text-dark: #0f0e17;
+  --color-text-muted: #a7a9be;
+
+  /* Colors */
+  --color-primary: #7b2d8b;   
+  --color-secondary: #1b998b; 
+  --color-accent: #e84855;
+  --color-gold: #f2d479;
+
+  --mood-happy: #f2d479;
+  --mood-excited: #bc48f0;
+  --mood-silly: #ff6b9d;
+  --mood-neutral: #a7a9be;
+  --mood-sleepy: #4a4e8c;
+  --mood-sad: #1b998b;
+  --mood-confused: #e07a5f;
+  --mood-angry: #e84855;
+
+  --nav-background: #13121f;
+  --nav-active: #7b2d8b;
+
+  /* Typography */
+  --font-family-heading: 'Playfair Display', sans-serif;
+  --font-family-body: 'DM Sans', sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 3rem;
+
+}

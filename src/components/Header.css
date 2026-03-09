@@ -1,0 +1,123 @@
+h1 {
+  width: max-content;
+  padding-bottom: 10px;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(
+    to right,
+    var(--mood-happy),
+    var(--mood-silly),
+    var(--mood-sleepy),
+    var(--mood-angry)
+  ) 1;
+}
+
+li {
+  margin-top: 20px;
+}
+
+a {
+  color: var(--color-text);
+}
+a:hover,
+a:active {
+  color: var(--color-secondary);
+}
+
+
+/* Mobile styles */
+.desktopNav {
+  display: none;
+}
+.bm-burger-button {
+  position: fixed;
+  width: 26px;
+  height: 20px;
+  right: 20px;
+  top: 50px;
+}
+
+.bm-burger-button button {
+  /* Experimental */
+  corner-shape: square;
+}
+
+.bm-burger-bars {
+  background: var(--color-secondary)
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.8)!important;
+}
+
+.bm-menu {
+  background: var(--nav-background);
+  border-top: 3px solid;
+  border-image: linear-gradient(
+    to right,
+    var(--mood-happy),
+    var(--mood-silly),
+    var(--mood-sleepy),
+    var(--mood-angry)
+  ) 1;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Menu links - react burger menu overrides */
+.bm-item {
+  display: inline-block;
+  color: var(--nav-text);
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+.bm-item:hover {
+  color: white;
+}
+
+.bm-cross {
+  height:24px !important;
+  width: 3px !important;
+  background: var(--color-accent)
+}
+
+.bm-cross-button button {
+  /* Experimental */
+  corner-shape: square;
+}
+
+.bm-menu-wrap {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+@media (min-width: 940px) {
+  body {
+    padding-top: 40px;
+  }
+  h1 {
+    margin-top: 0;
+  }
+  .mobileNav,
+  .bm-overlay,
+  .bm-burger-button {
+    display: none;
+  }
+  .desktopNav {
+    display: block;
+  }
+  .desktopNav li {
+    margin-top: 0;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+
+
+
+
+}

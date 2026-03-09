@@ -1,0 +1,180 @@
+
+form {
+  text-align: center;
+  margin-bottom: 60px;
+}
+  
+fieldset {
+  border: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  margin: 0 0 40px 0;
+  padding: 0;
+}
+
+.input.wrapper label {
+  font-size:4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+}
+
+.input.wrapper input {
+  /* Just want this visually hidden */
+   opacity: 0;
+}
+
+input[type="radio"]:checked + label {
+  outline: 2px solid var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 12px 8px var(--color-primary);
+}
+
+input[type="radio"]:focus + label,
+input[type="radio"]:focus-visible + label {
+  outline: 2px solid var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 12px 8px var(--color-primary);
+} 
+
+.textarea.wrapper  {
+  margin-bottom:40px;
+}
+
+.textarea.wrapper label {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.confirmation {
+  text-align: center;
+}
+.confirmation p {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+}
+
+/* Modal Form */
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-surface);
+  border-radius:1rem;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 0 40px rgba(123, 45, 139, 0.8);
+  z-index: 101;
+}
+
+.modal form {
+  margin-bottom: 40px;
+}
+
+.modal h3 {
+  margin-top: 60px;
+}
+
+.modal fieldset {
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  margin: 0 0 40px 0;
+}
+
+.modal .input.wrapper label {
+  font-size:2em;
+  width: 30px;
+  height: 30px;
+}
+
+.modal textarea {
+  width: 75%;
+}
+
+.modal .textarea.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal .closeModal {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 35px;
+  height: 35px;
+  z-index: 1;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  font-size: 0px;
+  background: transparent;
+  cursor: pointer;
+  /* Experimental */
+  corner-shape: square;
+}
+
+.modal .spanWrapper {
+  position: absolute; 
+  top: 10px; 
+  right: 20px;
+}
+
+/* Using bm-cross classes from 
+react burger menu so the close buttons match */
+.modal .bm-cross {
+  position: absolute; 
+  width: 3px; 
+  height: 14px; 
+}
+
+.modal .bm-cross.right {
+  transform: rotate(45deg);
+}
+
+.modal .bm-cross.left {
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  fieldset {
+    grid-template-columns: repeat(4, 1fr)
+  }
+  textarea {
+    width: 75%;
+  }
+  .textarea.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  textarea {
+    width: 50%;
+  }
+  .input.wrapper label {
+    width: 60px;
+    height: 64px;
+  }
+}
