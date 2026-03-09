@@ -9,7 +9,7 @@ import { Chart as ChartJS,
   Tooltip, 
   Legend } from 'chart.js';
 import { Pie, Bar, Line } from 'react-chartjs-2';
-import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './Helpers/MoodDataHelpers';
+import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './helpers/MoodDataHelpers';
 ChartJS.register(
   ArcElement, 
   CategoryScale,
