@@ -31,16 +31,33 @@ export default function Header() {
 
   return (
     <header>
-      {user && <h1>Mood Ring</h1>}
-      <Menu
-        isOpen={isOpen}
-        onStateChange={handleStateChange}
-        pageWrapId="page-wrap"
-        outerContainerId="outer-container"
-        right
-      >
       <nav>
-        <ul>
+      {user && <h1>Mood Ring</h1>}
+        <Menu
+          className="mobileNav"
+          isOpen={isOpen}
+          onStateChange={handleStateChange}
+          pageWrapId="page-wrap"
+          outerContainerId="outer-container"
+          right
+        >
+          <ul>
+            <li>
+              <Link to={'/'} onClick={closeSideBar}>Home</Link>
+            </li>
+            {user && <li>
+              <Link to={'/mood-memories'} onClick={closeSideBar}>Mood Memories</Link>
+            </li>}
+            {user && <li>
+              <Link to={'/mood-insights'} onClick={closeSideBar}>Mood Insights</Link>
+            </li>}
+            {user && <li>{user.displayName}</li>}
+            {user && <li>
+              <button onClick={() => signOut()}>Logout</button>
+            </li>}
+          </ul>
+        </Menu>
+        <ul className='desktopNav'>
           <li>
             <Link to={'/'} onClick={closeSideBar}>Home</Link>
           </li>
@@ -56,7 +73,6 @@ export default function Header() {
           </li>}
         </ul>
       </nav>
-      </Menu>
     </header>
   )
 }

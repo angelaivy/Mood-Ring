@@ -1,3 +1,9 @@
+.homepageDate p {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted)
+}
+
 .landing {
   display: flex;
   flex-direction: column;
@@ -20,7 +26,8 @@
 .landing p {
   color: var(--color-text-muted);
   font-size: var(--font-size-md);
-  max-width: 300px;
+  min-width: 300px;
+  max-width: 500px;
   line-height: 1.6;
 }
 
@@ -28,4 +35,14 @@
   color: var(--color-text);
   font-style: italic;
   font-size: var(--font-size-sm);
+}
+
+@media (min-width: 940px) {
+  .homepageDate {
+    text-align: center;
+    margin: 40px 0 0;
+  }
+  .homepageDate p {
+    margin-bottom: 0px;
+  }
 }

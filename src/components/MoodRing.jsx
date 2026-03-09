@@ -37,7 +37,7 @@ export default function MoodRing() {
  
   return (
     <>
-      <div><h2>{todaysDate}</h2></div>
+      <div className='homepageDate'><p>{todaysDate}</p></div>
       {!isLoggedIn && <div className='landing'>
         <h1>Mood Ring</h1>
         <p>Mood Ring ✨ Your daily mood journal. Track how you're feeling, reflect on your patterns, and understand yourself a little better — one mood at a time. Sign in to get started!</p>

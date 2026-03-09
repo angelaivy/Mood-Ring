@@ -57,7 +57,6 @@ textarea {
   text-align: center;
 }
 .confirmation p {
-  padding: 20px;
   font-family: var(--font-family-heading);
   font-size: var(--font-size-xl);
 }
@@ -79,8 +78,8 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   background: var(--color-surface);
-  border-radius: var(1rem);
-  padding: var(24px);
+  border-radius:1rem;
+  padding: 24px;
   width: 90%;
   max-width: 480px;
   box-shadow: 0 0 40px rgba(123, 45, 139, 0.8);
@@ -89,6 +88,10 @@ textarea {
 
 .modal form {
   margin-bottom: 40px;
+}
+
+.modal h3 {
+  margin-top: 60px;
 }
 
 .modal fieldset {
@@ -150,4 +153,28 @@ react burger menu so the close buttons match */
 
 .modal .bm-cross.left {
   transform: rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  fieldset {
+    grid-template-columns: repeat(4, 1fr)
+  }
+  textarea {
+    width: 75%;
+  }
+  .textarea.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  textarea {
+    width: 50%;
+  }
+  .input.wrapper label {
+    width: 60px;
+    height: 64px;
+  }
 }

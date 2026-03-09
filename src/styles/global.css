@@ -6,6 +6,11 @@ body {
   color: var(--color-text);
 }
 
+#root {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -44,10 +49,6 @@ body, p {
   font-weight: 400;
   font-style: normal;
   font-size: var(--font-size-md);
-}
-
-a {
-  border-bottom-color: var(--color-secondary);
 }
 
 .hide {

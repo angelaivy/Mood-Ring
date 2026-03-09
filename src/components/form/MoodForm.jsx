@@ -57,7 +57,7 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
   }
 
   return (
-    <div>
+    <>
       {// Background overlay when modal is visible.
         (isFormVisible && type === 'editEntry') && <div className='overlay'></div>
       }
@@ -99,6 +99,6 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
           <button onClick={() => addAnotherMood()}>Add another mood</button>
         </div>
       ) : '' }
-    </div>
+    </>
   )
 }

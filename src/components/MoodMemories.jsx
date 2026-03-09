@@ -32,7 +32,7 @@ export default function MoodMemories() {
   return (
     <>
       <h2>Mood Memories</h2>
-      <ul>
+      <ul className="cardList">
         {entries.map((entry) => {
           const date = entry.data.timestamp.toDate();
           const formattedDate = date.toLocaleString('en-US', {
@@ -68,7 +68,6 @@ export default function MoodMemories() {
           )
         })}
       </ul>
-     
      </>
     
   )

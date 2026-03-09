@@ -202,9 +202,9 @@ export default function MoodInsights() {
           <h3>Most frequent Mood</h3>
           {<p><MostFrequentMood /></p>}
         </div>
-        <Line options={lineChartOptions} data={lineChartData} />
-        <Bar options={barChartOptions} data={barChartData} />
-        <Pie options={pieOptions} data={pieData} />
+        <div className='chartWrapper pie'><Pie options={pieOptions} data={pieData} /></div>
+        <div className='chartWrapper line'><Line options={lineChartOptions} data={lineChartData} /></div>
+        <div className='chartWrapper bar'><Bar options={barChartOptions} data={barChartData} /></div>
       </div>
      </>
   )
