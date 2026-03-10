@@ -12,7 +12,7 @@ export default function MoodMemories() {
   const [editingId, setEditingId] = useState(null)
   const user = GetUser()
   const [isLoading, setIsLoading] = useState(true)
-  
+
   useEffect(() => {
     if (!user?.uid) return
     
@@ -34,11 +34,12 @@ export default function MoodMemories() {
 
   // Set loading spinner.
   if (isLoading) return <Loading />
-
+  
   return (
     <>
       <h2>Mood Memories</h2>
       {(!entries.length) && <p>Go to the <a href='/'>home page</a> to log your first mood! Your moods will show here.</p>}
+      <div className='overlay hide'></div>
       <ul className="cardList">
         {entries.map((entry) => {
           const date = entry.data.timestamp.toDate()

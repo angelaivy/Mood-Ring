@@ -20,4 +20,4 @@ I would have added a linter in the beginning so my code was more consistent, wit
 
 ## 4 What would you improve and/or add to this project now that it's deployed?
 
-I'd like to add pagination or some sort of filter for the mood memories page so that when you have a lot of entries it's not just one long scrolling list. And I think there could be better error handling in general. 
+I'd like to add pagination or some sort of filter for the mood memories page so that when you have a lot of entries it's not just one long scrolling list. And I think there could be better error handling in general. I'd also re-work the form area so it's cleaner with the modal form vs the regular form.

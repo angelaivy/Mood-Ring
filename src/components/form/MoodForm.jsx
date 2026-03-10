@@ -75,40 +75,46 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
     setIsSubmitted(false)
   }
 
+  if (isFormVisible && type === 'editEntry') {
+    document.querySelector('.overlay').classList.remove('hide')
+  }
+
+  const closeModal = () => {
+    formToggle()
+    document.querySelector('.overlay').classList.add('hide')
+  }
+
   return (
     <>
-      {// Background overlay when modal is visible.
-        (isFormVisible && type === 'editEntry') && <div className='overlay'></div>
-      }
       { // Set form visibility based on editing or submitted state.
       (!isSubmitted && isFormVisible) && 
-        <div className={(type === 'editEntry') ? 'modal' : ''}>
-        {// Only show the close button if it's the edit form modal.
-          (type === 'editEntry') && 
-          <>
-            <button className='closeModal' onClick={() => formToggle()}>Close Modal</button>
-            <span className='spanWrapper'>
-              <span className='bm-cross right'></span>
-              <span className='bm-cross left'></span>
-            </span>
-          </>
-        }
-      <form onSubmit={handleSubmit}>  
-        <fieldset>
-          <legend><h3>{introFormText}</h3></legend>
-          <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
-          <FormElement type='input' id='excited' value='🤩' onChange={handleChange} />
-          <FormElement type='input' id='silly' value='😜' onChange={handleChange} />
-          <FormElement type='input' id='neutral' value='😐' onChange={handleChange} />
-          <FormElement type='input' id='tired' value='😴' onChange={handleChange} />
-          <FormElement type='input' id='sad' value='😢' onChange={handleChange} />
-          <FormElement type='input' id='confused' value='😕' onChange={handleChange} />
-          <FormElement type='input' id='angry' value='😡' onChange={handleChange} />
-        </fieldset>
+        <div aria-modal={(type === 'editEntry') ? true : false} className={(type === 'editEntry') ? 'modal' : ''}>
+          {// Only show the close button if it's the edit form modal.
+            (type === 'editEntry') && 
+            <>
+              <button className='closeModal' onClick={() => closeModal()}>Close Modal</button>
+              <span className='spanWrapper'>
+                <span className='bm-cross right'></span>
+                <span className='bm-cross left'></span>
+              </span>
+            </>
+          }
+        <form onSubmit={handleSubmit}>  
+          <fieldset>
+            <legend><h3>{introFormText}</h3></legend>
+            <FormElement type='input' id='happy' value='😀' onChange={handleChange} />
+            <FormElement type='input' id='excited' value='🤩' onChange={handleChange} />
+            <FormElement type='input' id='silly' value='😜' onChange={handleChange} />
+            <FormElement type='input' id='neutral' value='😐' onChange={handleChange} />
+            <FormElement type='input' id='tired' value='😴' onChange={handleChange} />
+            <FormElement type='input' id='sad' value='😢' onChange={handleChange} />
+            <FormElement type='input' id='confused' value='😕' onChange={handleChange} />
+            <FormElement type='input' id='angry' value='😡' onChange={handleChange} />
+          </fieldset>
 
-        <FormElement type='textarea' id='note' onChange={handleChange}/>
-        <button type='submit'>Submit Mood</button>
-      </form> 
+          <FormElement type='textarea' id='note' onChange={handleChange}/>
+          <button type='submit'>Submit Mood</button>
+        </form> 
       </div>
       }
 

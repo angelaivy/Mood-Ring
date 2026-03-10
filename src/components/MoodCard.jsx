@@ -16,7 +16,7 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
         await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id))
         setIsDeleted(true)
       } catch(e) {
-        console.log('There was an error trying to delete the entry', e)
+        console.error('There was an error trying to delete the entry', e)
       }
     }
 
@@ -40,7 +40,7 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
       <li id={id} className='card' style={{ borderLeftColor: moodColors[mood] }}>
         <h3>{date}</h3>
         <p className='mood'>{mood}</p>
-        <div class="row2-col1">
+        <div className="row2-col1">
           {note && <p className='note'>{note}</p>}
           <div className='cardBtns'>
             <button onClick={onEdit}>Edit</button>
