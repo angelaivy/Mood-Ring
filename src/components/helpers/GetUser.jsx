@@ -16,7 +16,7 @@ export default function GetUser() {
     }
 
     return () => unsub()
-  }, [user])
+  }, [user, Navigate])
 
   return user
 }

@@ -18,12 +18,6 @@ export default function MoodRing() {
     day: 'numeric'
   })
 
-  const uiConfig = {
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-    signInFlow: 'popup',
-    signInSuccessUrl: '/',
-  }
-
   // Adds the class for the mood ring background styling on home page only.
   useEffect(() => {
     document.body.classList.add('homePage')
@@ -34,7 +28,11 @@ export default function MoodRing() {
      // Initialize the FirebaseUI Widget using Firebase.
     const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
     if (isLoggedIn === false) {
-      ui.start('#firebaseui-auth-container', uiConfig)
+      ui.start('#firebaseui-auth-container', {
+        signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+        signInFlow: 'popup',
+        signInSuccessUrl: '/',
+      })
     }
   }, [isLoggedIn]) 
 
@@ -43,7 +41,7 @@ export default function MoodRing() {
       setIsLoggedIn(!!user)
     })
     return () => unsubscribe()
-  }, [])
+  }, [auth])
 
   // Loading... 
   if (isLoggedIn === null) {

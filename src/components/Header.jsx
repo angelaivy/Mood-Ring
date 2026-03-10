@@ -22,7 +22,6 @@ export default function Header() {
     .then(() => {
       Navigate('/')
       closeSideBar()
-      setIsLoggedIn(false)
     })
     .catch((e) =>{
       console.error('An error happened on signout', e)
