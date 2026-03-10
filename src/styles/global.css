@@ -27,31 +27,31 @@ body.homePage::before {
   height: 200%;
   background: radial-gradient(
       ellipse at 20% 50%,
-      rgba(123, 45, 139, 0.6) 0%,
-      transparent 50%
+      rgba(175, 54, 199, 0.35) 0%,
+      transparent 35%
     ),
     radial-gradient(
       ellipse at 80% 20%,
-      rgba(27, 153, 139, 0.6) 0%,
-      transparent 50%
+      rgba(13, 235, 209, 0.35) 0%,
+      transparent 35%
     ),
     radial-gradient(
       ellipse at 60% 80%,
-      rgba(188, 72, 240, 0.6) 0%,
-      transparent 50%
+      rgba(188, 72, 240, 0.35) 0%,
+      transparent 35%
     ),
     radial-gradient(
       ellipse at 40% 30%,
-      rgba(242, 212, 121, 0.3) 0%,
-      transparent 40%
+      rgba(9, 166, 130, 0.231) 0%,
+      transparent 25%
     ),
     radial-gradient(
       ellipse at 10% 80%,
-      rgba(232, 72, 85, 0.4) 0%,
-      transparent 40%
+      rgba(232, 72, 85, 0.422) 0%,
+      transparent 25%
     );
   animation: moodShift 8s ease-in-out infinite alternate;
-  filter: blur(20px);
+  filter: blur(25px);
 }
 
 @keyframes moodShift {
