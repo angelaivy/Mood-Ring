@@ -1,17 +1,26 @@
-import { doc, deleteDoc } from "firebase/firestore";
-import { db } from "../db";
-import { useState } from "react";
-import GetUser from "./helpers/GetUser";
+import { doc, deleteDoc } from "firebase/firestore"
+import { db } from "../db"
+import { useState } from "react"
+import GetUser from "./helpers/GetUser"
 import './MoodCard.css'
 
 export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
-  const user = GetUser();
-  const [isDeleted, setIsDeleted] = useState(false);
+  const user = GetUser()
+  const [isDeleted, setIsDeleted] = useState(false)
 
-  const onDelete = async () => {
+  const onDelete = () => {
     if (!user?.uid) return
-    await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id));
-    setIsDeleted(true);
+
+    const deleteData = async () => {
+      try {
+        await deleteDoc(doc(db, 'users', user.uid, 'mood-logs', id))
+        setIsDeleted(true)
+      } catch(e) {
+        console.error('There was an error trying to delete the entry', e)
+      }
+    }
+
+    deleteData()
   }
 
   const moodColors = {
@@ -31,10 +40,12 @@ export default function MoodCard({id, date, mood, note, onEdit, isEditing}) {
       <li id={id} className='card' style={{ borderLeftColor: moodColors[mood] }}>
         <h3>{date}</h3>
         <p className='mood'>{mood}</p>
-        {note && <p className='note'>{note}</p>}
-        <div className='cardBtns'>
-          <button onClick={onEdit}>Edit</button>
-          <button onClick={onDelete}>Delete</button>
+        <div className="row2-col1">
+          {note && <p className='note'>{note}</p>}
+          <div className='cardBtns'>
+            <button onClick={onEdit}>Edit</button>
+            <button onClick={onDelete}>Delete</button>
+          </div>
         </div>
       </li> 
     }

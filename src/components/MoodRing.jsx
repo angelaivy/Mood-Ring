@@ -1,42 +1,56 @@
 import firebase from 'firebase/compat/app'
 import * as firebaseui from 'firebaseui'
-import MoodForm from "./form/MoodForm";
-import { useEffect, useState } from "react";
-import 'firebaseui/dist/firebaseui.css';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import MoodForm from "./form/MoodForm"
+import { useEffect, useState } from "react"
+import 'firebaseui/dist/firebaseui.css'
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import './MoodRing.css'
+import Loading from './Loading'
 
 export default function MoodRing() {
-  const auth = getAuth();
-  const [isFormVisible, setIsFormVisible] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = getAuth()
+  const [isFormVisible, setIsFormVisible] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
 
   const todaysDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric'
-  });
-  
+  })
+
+  const uiConfig = {
+    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+    signInFlow: 'popup',
+    signInSuccessUrl: '/',
+  }
+
+  // Adds the class for the mood ring background styling on home page only.
+  useEffect(() => {
+    document.body.classList.add('homePage')
+    return () => document.body.classList.remove('homePage')
+  }, [])
+
   useEffect(() => {
      // Initialize the FirebaseUI Widget using Firebase.
-    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
-    if (!isLoggedIn) {
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        ],
-        signInFlow: 'popup',
-        signInSuccessUrl: '/',
-      });
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
+    if (isLoggedIn === false) {
+      ui.start('#firebaseui-auth-container', uiConfig)
     }
   }, [isLoggedIn]) 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-    });
-    return () => unsubscribe();
-  }, []);
+      setIsLoggedIn(!!user)
+    })
+    return () => unsubscribe()
+  }, [])
+
+  // Loading... 
+  if (isLoggedIn === null) {
+    return (
+      <Loading />
+    )
+  }
  
   return (
     <>
@@ -52,6 +66,5 @@ export default function MoodRing() {
         isFormVisible={isFormVisible} 
         formToggle={() => setIsFormVisible(prev => !prev)} />}
     </>
-    
   )
 }

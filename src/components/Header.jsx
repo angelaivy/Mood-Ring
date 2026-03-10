@@ -2,20 +2,20 @@ import firebase from 'firebase/compat/app'
 import { Link, useNavigate } from "react-router-dom"
 import GetUser from "./helpers/GetUser"
 import './Header.css'
-import { slide as Menu } from 'react-burger-menu';
+import { slide as Menu } from 'react-burger-menu'
 import { useState } from 'react'
 
 export default function Header() {
-  const user = GetUser();
-  const Navigate = useNavigate();
+  const user = GetUser()
+  const Navigate = useNavigate()
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const handleStateChange = (state) => {
-    setIsOpen(state.isOpen);
-  };
+    setIsOpen(state.isOpen)
+  }
   const closeSideBar = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const signOut = () => {
     firebase.auth().signOut()
@@ -25,8 +25,8 @@ export default function Header() {
       setIsLoggedIn(false)
     })
     .catch((e) =>{
-      console.error('An error happened on signout', e);
-    });
+      console.error('An error happened on signout', e)
+    })
   }
 
   return (

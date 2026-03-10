@@ -7,9 +7,9 @@ import { Chart as ChartJS,
   Title, 
   ArcElement, 
   Tooltip, 
-  Legend } from 'chart.js';
-import { Pie, Bar, Line } from 'react-chartjs-2';
-import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './helpers/MoodDataHelpers';
+  Legend } from 'chart.js'
+import { Pie, Bar, Line } from 'react-chartjs-2'
+import { MostFrequentMood, GetMoodCountsOnly, MoodCount, GetAllMoodData } from './helpers/MoodDataHelpers'
 ChartJS.register(
   ArcElement, 
   CategoryScale,
@@ -19,11 +19,12 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip, 
-  Legend);
+  Legend)
 import './MoodInsights.css'
 import '../styles/variables.css'
 
 export default function MoodInsights() {
+  // Set colors here since chart.js cannot read css vars. 
   const primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary')
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--color-accent')
   const happy = getComputedStyle(document.documentElement).getPropertyValue('--mood-happy')
@@ -47,7 +48,7 @@ export default function MoodInsights() {
   }
 
   // Bar Chart
-  const countForBarChart = MoodCount();
+  const countForBarChart = MoodCount()
   const barChartOptions = {
     responsive: true,
     plugins: {
@@ -72,9 +73,9 @@ export default function MoodInsights() {
           grid: { color: 'rgba(255,255,255,0.1)' }
         }
       }
-  };
+  }
 
-  const barChartLabels = Object.keys(countForBarChart);
+  const barChartLabels = Object.keys(countForBarChart)
   const moodStyles = {
     '😀': { background: happy },
     '🤩': { background: excited },
@@ -93,10 +94,10 @@ export default function MoodInsights() {
         backgroundColor: Object.keys(countForBarChart).map(mood => moodStyles[mood].background),
       }
     ],
-  };
+  }
 
   // Pie Chart
-  const getMoodCountData = GetMoodCountsOnly();
+  const getMoodCountData = GetMoodCountsOnly()
   const pieOptions = {
     responsive: true,
     plugins: {
@@ -110,7 +111,7 @@ export default function MoodInsights() {
         font: { size: 16 },
       },
     },
-  };
+  }
   const pieData = {
     labels: ['😀', '🤩', '😜', '😐', '😴', '😢', '😕', '😡'],
     datasets: [
@@ -133,7 +134,7 @@ export default function MoodInsights() {
         borderWidth: 1,
       },
     ],
-  };
+  }
 
   // Line Chart
   const lineChartOptions = {
@@ -164,7 +165,7 @@ export default function MoodInsights() {
               2: '😢',
               1: '😡'
             }
-            return scoreToMood[value];
+            return scoreToMood[value]
           }
         },
         grid: { color: 'rgba(255,255,255,0.1)' },
@@ -174,11 +175,11 @@ export default function MoodInsights() {
         grid: { color: 'rgba(255,255,255,0.1)' }
       }
     }
-  };
+  }
   const moodScore = {
     '😀': 8, '🤩': 7, '😜': 6, '😐': 5, '😴': 4, '😕': 3, '😢': 2, '😡': 1
   }
-  const moodDataObj = GetAllMoodData().slice().reverse();
+  const moodDataObj = GetAllMoodData().slice().reverse()
   const lineChartData = {
     labels: moodDataObj.map(entry => 
       entry.data.timestamp.toDate().toLocaleDateString()

@@ -1,6 +1,6 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -9,11 +9,11 @@ const firebaseConfig = {
 }
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig)
 }
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+const auth = firebase.auth()
+const db = firebase.firestore()
 
-export { auth, db };
-export default firebase;
+export { auth, db }
+export default firebase

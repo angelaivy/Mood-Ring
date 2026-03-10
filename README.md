@@ -16,8 +16,8 @@ Difficult state manangement. The hardest part for me was that I chose to re-use 
 
 ## 3 What changes would you make to this project now that it's deployed?
 
-I would have added a linter in the beginning so my code was more consistent, without having to tink about that manually. Spacing, semicolons, etc. And I'd probably want to get feedback on the form situation listed above so I could get a better grasp on the state management. But overall, I'm pretty happy with how this project turned out. 
+I would have added a linter in the beginning so my code was more consistent, without having to think about that manually. Spacing, semicolons, etc. And I'd probably want to get feedback on the form situation listed above so I could get a better grasp on the state management. But overall, I'm pretty happy with how this project turned out. 
 
 ## 4 What would you improve and/or add to this project now that it's deployed?
 
-I'd like to add pagination or some sort of filter for the mood memories page so that when you have a lot of entries it's not just one long scrolling list. And I think there could be better error handling in general. 
+I'd like to add pagination or some sort of filter for the mood memories page so that when you have a lot of entries it's not just one long scrolling list. And I think there could be better error handling in general. I'd also re-work the form area so it's cleaner with the modal form vs the regular form.

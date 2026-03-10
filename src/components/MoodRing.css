@@ -1,7 +1,6 @@
 .homepageDate p {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-lg);
-  color: var(--color-text-muted)
 }
 
 .landing {
@@ -15,7 +14,7 @@
 }
 
 .landing h1 {
-  font-size: 3rem;
+  font-size: 6rem;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -24,7 +23,6 @@
 }
 
 .landing p {
-  color: var(--color-text-muted);
   font-size: var(--font-size-md);
   min-width: 300px;
   max-width: 500px;

@@ -10,6 +10,8 @@
 
 .insights .card {
   text-align: center;
+  display: block;
+  justify-items: center;
 }
 
 .insights .card h3{

@@ -11,6 +11,64 @@ body {
   margin: 0 auto;
 }
 
+body.homePage {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #0f0e17;
+}
+
+body.homePage::before {
+  z-index: -1000;
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      ellipse at 20% 50%,
+      rgba(175, 54, 199, 0.35) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(13, 235, 209, 0.35) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 60% 80%,
+      rgba(188, 72, 240, 0.35) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 40% 30%,
+      rgba(9, 166, 130, 0.231) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 10% 80%,
+      rgba(232, 72, 85, 0.422) 0%,
+      transparent 25%
+    );
+  animation: moodShift 8s ease-in-out infinite alternate;
+  filter: blur(25px);
+}
+
+@keyframes moodShift {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(10%, -10%) rotate(15deg) scale(1.1);
+  }
+  66% {
+    transform: translate(-10%, 10%) rotate(-10deg) scale(0.9);
+  }
+  100% {
+    transform: translate(6%, -6%) rotate(12deg) scale(1.08);
+  }
+}
+
 ul {
   margin: 0;
   padding: 0;
