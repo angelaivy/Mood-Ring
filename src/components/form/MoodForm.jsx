@@ -18,6 +18,7 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
     type === 'editEntry' ? `Edit entry for ${date}` : 'How are you feeling today?'
   )
   const user = GetUser()
+  const overlay = document.querySelector('.overlay')
 
   // Handle submit for both the edit form and home page form.
   const handleSubmit = (e) => {
@@ -47,6 +48,7 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
       if (!user?.uid) return
 
       const editData = async () => {
+        overlay.classList.add('hide')
         try {
           await setDoc(doc(db, 'users', user.uid, 'mood-logs', id), {
             formData,
@@ -76,12 +78,12 @@ export default function MoodForm({type, id, rawDate, date, isFormVisible, formTo
   }
 
   if (isFormVisible && type === 'editEntry') {
-    document.querySelector('.overlay').classList.remove('hide')
+    overlay.classList.remove('hide')
   }
 
   const closeModal = () => {
     formToggle()
-    document.querySelector('.overlay').classList.add('hide')
+    overlay.classList.add('hide')
   }
 
   return (
