@@ -21,7 +21,7 @@ body.homePage {
 body.homePage::before {
   z-index: -1000;
   content: '';
-  position: absolute;
+  position: fixed;
   inset: -50%;
   width: 200%;
   height: 200%;
